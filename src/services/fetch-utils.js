@@ -23,3 +23,11 @@ export async function getRestaurants() {
 
   return checkError(response);
 }
+
+export async function createFavoriteRestaurant(restaurant) {
+  const response = await client
+    .from('favorite-restaurants')
+    .insert(restaurant);
+
+  return checkError(response);
+}
