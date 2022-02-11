@@ -2,6 +2,7 @@ import { BrowserRouter, Switch, Route, Redirect, Link, NavLink } from 'react-rou
 import { useState } from 'react';
 import AuthPage from './AuthPage';
 import Home from './Home';
+import AddFavorite from './AddFavorite';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('supabase.auth.token'));
@@ -27,6 +28,13 @@ function App() {
           {
             currentUser
               ? <Home />
+              : <Redirect to='/authenticate' />
+          }
+        </Route>
+        <Route exact path='/add-favorite' >
+          {
+            currentUser
+              ? <AddFavorite />
               : <Redirect to='/authenticate' />
           }
         </Route>

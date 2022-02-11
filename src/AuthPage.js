@@ -33,7 +33,7 @@ export default function AuthPage({ setCurrentUser }) {
         </label>
         <button type='submit'>Sign In</button>
         <button type='button' onClick={handleSignUp}>Sign Up</button>
-      </form>
+      </form>          
     </div>
   );
 }
