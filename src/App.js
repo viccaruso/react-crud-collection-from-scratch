@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { useState } from 'react';
+import AuthPage from './AuthPage';
+import Home from './Home';
+import AddFavorite from './AddFavorite';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(localStorage.getItem('supabase.auth.token'));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/'>
+          {
+            currentUser
+              ? <Redirect to='/home' />
+              : <Redirect to='/authenticate' />
+          }
+        </Route>
+        <Route exact path='/authenticate' >
+          {
+            currentUser
+              ? <Redirect to='/home' />
+              : <AuthPage setCurrentUser={setCurrentUser} />
+          }
+        </Route>
+        <Route exact path='/home' >
+          {
+            currentUser
+              ? <Home />
+              : <Redirect to='/authenticate' />
+          }
+        </Route>
+        <Route exact path='/add-favorite' >
+          {
+            currentUser
+              ? <AddFavorite />
+              : <Redirect to='/authenticate' />
+          }
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
