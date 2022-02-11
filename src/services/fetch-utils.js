@@ -15,3 +15,11 @@ export async function signUp(email, password) {
 
   return response.user;
 }
+
+export async function getRestaurants() {
+  const response = await client
+    .from('favorite-restaurants')
+    .select();
+
+  return checkError(response);
+}
