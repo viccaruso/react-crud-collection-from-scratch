@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, Redirect, Link, NavLink } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import AuthPage from './AuthPage';
 import Home from './Home';
