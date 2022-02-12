@@ -59,3 +59,8 @@ export async function deleteRestaurant(id) {
 
   return checkError(response);
 }
+
+export async function logout() {
+  await client.auth.signOut();
+  window.location.href = '/';
+}

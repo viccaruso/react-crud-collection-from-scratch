@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import RestaurantList from './RestaurantList';
-import { getRestaurants } from './services/fetch-utils';
+import { getRestaurants, logout } from './services/fetch-utils';
 
 export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
@@ -28,6 +28,7 @@ export default function Home() {
     <div className='home-page'>
       <RestaurantList restaurants={restaurants} />
       <button type='button' onClick={routeChange}>Add Restaurant</button>
+      <button type='button' onClick={logout}>Logout</button>
     </div>
   );
 }
