@@ -3,6 +3,8 @@ import { useState } from 'react';
 import AuthPage from './AuthPage';
 import Home from './Home';
 import AddFavorite from './AddFavorite';
+import EditPage from './EditPage';
+import './App.css';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(localStorage.getItem('supabase.auth.token'));
@@ -35,6 +37,13 @@ function App() {
           {
             currentUser
               ? <AddFavorite />
+              : <Redirect to='/authenticate' />
+          }
+        </Route>
+        <Route exact path='/edit/:id' >
+          {
+            currentUser
+              ? <EditPage />
               : <Redirect to='/authenticate' />
           }
         </Route>
