@@ -23,17 +23,21 @@ export default function AuthPage({ setCurrentUser }) {
   }
 
   return (
-    <div className='auth-form'>
-      <form onSubmit={handleSignIn}>
-        <label>email
-          <input type='text' value={formEmail} onChange={e => setFormEmail(e.target.value)}></input>
-        </label>
-        <label>password
-          <input type='password' value={formPass} onChange={e => setFormPass(e.target.value)}></input>
-        </label>
-        <button type='submit'>Sign In</button>
-        <button type='button' onClick={handleSignUp}>Sign Up</button>
-      </form>          
-    </div>
+    <>
+      <h1>Welcome to My Favorite Restaurant List</h1>
+      <p>Please Log In or Sign Up</p>
+      <div className='auth-form'>
+        <form onSubmit={handleSignIn}>
+          <label>email
+            <input type='text' value={formEmail} onChange={e => setFormEmail(e.target.value)}></input>
+          </label>
+          <label>password
+            <input type='password' value={formPass} onChange={e => setFormPass(e.target.value)}></input>
+          </label>
+          <button type='submit'>Sign In</button>
+          <button type='button' onClick={handleSignUp}>Sign Up</button>
+        </form>
+      </div>
+    </>
   );
 }
