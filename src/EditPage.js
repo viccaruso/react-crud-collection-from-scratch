@@ -1,10 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { createFavoriteRestaurant } from './services/fetch-utils';
+import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { editFavoriteRestaurant, getSingleRestaurant, deleteRestaurant } from './services/fetch-utils';
 
-export default function AddFavorite() {
+export default function UpdatePage() {
   const history = useHistory();
+  const { id } = useParams();
   const [name, setName] = useState('');
   const [cuisine, setCuisine] = useState('');
   const [rating, setRating] = useState(1);
@@ -14,7 +15,12 @@ export default function AddFavorite() {
     e.preventDefault();
 
     const restaurant = { name, cuisine, rating, website };
-    await createFavoriteRestaurant(restaurant);
+    await editFavoriteRestaurant(id, restaurant);
+    history.push('/home');
+  }
+
+  async function handleDelete(id) {
+    await deleteRestaurant(id);
     history.push('/home');
   }
 
@@ -25,9 +31,24 @@ export default function AddFavorite() {
     setWebsite('');
   }
 
+  useEffect(() => {
+    async function fetch() {
+      const restaurant = await getSingleRestaurant(id);
+
+      setName(restaurant.name);
+      setCuisine(restaurant.cuisine);
+      setRating(restaurant.rating);
+      setWebsite(restaurant.website);
+    }
+
+    fetch();
+
+  }, [id]);
+
+
   return (
     <>
-      <h1>Add New Favorite Restaurant</h1>
+      <h1>Edit Restaurant Details</h1>
       <div className='restaurant-form-container'>
         <form className='restaurant-form' onSubmit={handleSubmit}>
           <label>Restaurant Name
@@ -50,10 +71,11 @@ export default function AddFavorite() {
           </label>
           <div className='button-div'>
             <button type='button' onClick={clearFields}>Reset Fields</button>
-            <button type='submit' style={{ background: 'lightgreen' }}>Add Favorite</button>
-            <button type='button' onClick={() => history.push('./home')}>Cancel</button>
+            <button type='submit' style={{ background: 'lightgreen' }}>Update</button>
+            <button type='button' onClick={() => history.push('../home')}>Cancel</button>
           </div>
         </form>
+        <button type='button' id='delete-button' onClick={() => handleDelete(id)}>DELETE</button>
       </div>
     </>
   );

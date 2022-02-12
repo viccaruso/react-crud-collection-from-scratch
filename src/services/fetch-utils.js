@@ -31,3 +31,31 @@ export async function createFavoriteRestaurant(restaurant) {
 
   return checkError(response);
 }
+
+export async function editFavoriteRestaurant(id, restaurant) {
+  const response = await client
+    .from('favorite-restaurants')
+    .update(restaurant)
+    .match({ id });
+  
+  return checkError(response);
+}
+
+export async function getSingleRestaurant(id) {
+  const response = await client
+    .from('favorite-restaurants')
+    .select()
+    .match({ id })
+    .single();
+
+  return checkError(response);
+}
+
+export async function deleteRestaurant(id) {
+  const response = await client
+    .from('favorite-restaurants')
+    .delete()
+    .match({ id });
+
+  return checkError(response);
+}

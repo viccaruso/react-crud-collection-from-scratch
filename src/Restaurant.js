@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Restaurant({ restaurant }) {
   return (
@@ -9,6 +10,9 @@ export default function Restaurant({ restaurant }) {
       <a href={restaurant.website} target="_blank" rel="noreferrer">
         <p>{`Visit ${restaurant.name}'s website`}</p>
       </a>
+      <Link to={`/edit/${restaurant.id}`} >
+        <p>Update details</p>
+      </Link>
     </div>
   );
 }

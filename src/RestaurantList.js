@@ -4,10 +4,11 @@ import Restaurant from './Restaurant';
 export default function RestaurantList({ restaurants }) {
 
   return (
-    <div className='restaurant-list'>
-      {
-        restaurants.map((restaurant) => <Restaurant restaurant={restaurant} key={restaurant.id} />)
-      }
-    </div>
+    <>
+      <h1>My Favorite Restaurants</h1>
+      <div className='restaurant-list'>
+        {restaurants.map((restaurant) => <Restaurant restaurant={restaurant} key={restaurant.id} />)}
+      </div>
+    </>
   );
 }
